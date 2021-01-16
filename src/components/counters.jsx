@@ -1,28 +1,27 @@
 import Counter from "./counter.jsx";
-import React, { Component } from "react";
+import React from "react";
 
-class Counters extends Component {
-  render() {
-    return (
-      <div>
-        <button
-          onClick={() => this.props.onReset()}
-          className="btn btn-primary btn-lg m-2"
-        >
-          Reset
-        </button>
-        {this.props.counters.map((counter) => (
-          <Counter
-            key={counter.id}
-            onIncrement={this.props.onIncrement}
-            onDecrement={this.props.onDecrement}
-            onDelete={this.props.onDelete}
-            counter={counter}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+const Counters = (props) => {
+  return (
+    <div>
+      <button
+        onClick={() => props.onReset()}
+        className="btn btn-primary btn-lg m-2"
+      >
+        Reset
+      </button>
+      {props.counters.map((counter) => (
+        <Counter
+          key={counter.id}
+          onIncrement={props.onIncrement}
+          onDecrement={props.onDecrement}
+          onDelete={props.onDelete}
+          onLike={props.onLike}
+          counter={counter}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default Counters;

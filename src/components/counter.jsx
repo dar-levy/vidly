@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Like from "./like.jsx";
 
 class Counter extends Component {
   render() {
@@ -21,6 +22,11 @@ class Counter extends Component {
           >
             -
           </button>
+          <Like
+            counter={this.props.counter}
+            onClick={() => this.props.onLike(this.props.counter)}
+            style={{ cursor: "pointer" }}
+          />
           <button
             onClick={() => this.props.onDelete(this.props.counter.id)}
             className="btn btn-danger btn-sm"

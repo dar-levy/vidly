@@ -6,10 +6,10 @@ import "./App.css";
 class App extends Component {
   state = {
     counters: [
-      { id: 1, value: 4 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 },
+      { id: 1, value: 4, liked: false },
+      { id: 2, value: 0, liked: false },
+      { id: 3, value: 0, liked: false },
+      { id: 4, value: 0, liked: false },
     ],
   };
 
@@ -42,6 +42,14 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  handleLike = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counter.indexOf(counter);
+    counters[index] = { ...counters[index] };
+    counters[index].liked = !counters[index].liked;
+    this.setState(counters);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -55,6 +63,7 @@ class App extends Component {
             onDelete={this.handleDelete}
             onIncrement={this.handleIncrement}
             onDecrement={this.handleDecrement}
+            onLike={this.handleLike}
           />
         </main>
       </React.Fragment>
