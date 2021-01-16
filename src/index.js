@@ -1,12 +1,10 @@
-import "bootstrap/dist/css/bootstrap.css";
-import ReactDOM from "react-dom";
 import React from "react";
-import App from "./App.js";
+import ReactDOM from "react-dom";
 import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
+registerServiceWorker();
