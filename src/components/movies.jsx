@@ -51,8 +51,14 @@ class Movies extends Component {
     const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
-      <React.Fragment>
-        <div>
+      <div className="row">
+        <div className="col-2">
+          <ListGroup
+            onGenreChange={this.handleGenreChange}
+            currentGenre={currentGenre}
+          />
+        </div>
+        <div className="col">
           <p>Showing {count} movies in the database.</p>
           <table className="table">
             <thead>
@@ -97,11 +103,7 @@ class Movies extends Component {
             onPageChange={this.handlePageChange}
           />
         </div>
-        <ListGroup
-          onGenreChange={this.handleGenreChange}
-          currentGenre={currentGenre}
-        />
-      </React.Fragment>
+      </div>
     );
   }
 }
