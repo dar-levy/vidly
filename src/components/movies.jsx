@@ -1,6 +1,7 @@
 import { getMovies } from "../services/fakeMovieService";
 import Pagination from "./common/pagination.jsx";
 import { paginate } from "../utils/paginate.js";
+import ListGroup from "./common/listGroup";
 import React, { Component } from "react";
 import Like from "./common/like";
 
@@ -9,6 +10,7 @@ class Movies extends Component {
     movies: getMovies(),
     pageSize: 4,
     currentPage: 1,
+    currentGenre: "Action",
   };
 
   handleDelete = (movie) => {
@@ -28,9 +30,21 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
+  handleGenreChange = (genre) => {
+    let movies = getMovies();
+    movies = movies.filter((movie) => movie.genre.name === genre.name);
+    this.setState({ movies });
+    this.setState({ currentGenre: genre });
+  };
+
   render() {
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, movies: allMovies } = this.state;
+    const {
+      pageSize,
+      currentPage,
+      movies: allMovies,
+      currentGenre,
+    } = this.state;
 
     if (count === 0) return <p>There are no movies in the database.</p>;
 
@@ -38,48 +52,54 @@ class Movies extends Component {
 
     return (
       <React.Fragment>
-        <p>Showing {count} movies in the database.</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Genre</th>
-              <th>Stock</th>
-              <th>Rate</th>
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {movies.map((movie) => (
-              <tr key={movie._id}>
-                <td>{movie.title}</td>
-                <td>{movie.genre.name}</td>
-                <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
-                <td>
-                  <Like
-                    liked={movie.liked}
-                    onClick={() => this.handleLike(movie)}
-                  />
-                </td>
-                <td>
-                  <button
-                    onClick={() => this.handleDelete(movie)}
-                    className="btn btn-danger btn-sm"
-                  >
-                    Delete
-                  </button>
-                </td>
+        <div>
+          <p>Showing {count} movies in the database.</p>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Stock</th>
+                <th>Rate</th>
+                <th />
+                <th />
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          totalCount={count}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
+            </thead>
+            <tbody>
+              {movies.map((movie) => (
+                <tr key={movie._id}>
+                  <td>{movie.title}</td>
+                  <td>{movie.genre.name}</td>
+                  <td>{movie.numberInStock}</td>
+                  <td>{movie.dailyRentalRate}</td>
+                  <td>
+                    <Like
+                      liked={movie.liked}
+                      onClick={() => this.handleLike(movie)}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => this.handleDelete(movie)}
+                      className="btn btn-danger btn-sm"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination
+            totalCount={count}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
+        </div>
+        <ListGroup
+          onGenreChange={this.handleGenreChange}
+          currentGenre={currentGenre}
         />
       </React.Fragment>
     );
