@@ -10,7 +10,7 @@ class Movies extends Component {
     movies: getMovies(),
     pageSize: 4,
     currentPage: 1,
-    currentGenre: "Action",
+    currentGenre: "All Genres",
   };
 
   handleDelete = (movie) => {
@@ -32,9 +32,10 @@ class Movies extends Component {
 
   handleGenreChange = (genre) => {
     let movies = getMovies();
-    movies = movies.filter((movie) => movie.genre.name === genre.name);
-    this.setState({ movies });
-    this.setState({ currentGenre: genre });
+    if (genre.name !== "All Genres") {
+      movies = movies.filter((movie) => movie.genre.name === genre.name);
+    }
+    this.setState({ movies, currentGenre: genre.name });
   };
 
   render() {

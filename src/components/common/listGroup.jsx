@@ -11,7 +11,7 @@ const ListGroup = (props) => {
         <li
           key={genre._id}
           className={
-            genre === currentGenre
+            genre.name === currentGenre
               ? "list-group-item active"
               : "list-group-item"
           }
