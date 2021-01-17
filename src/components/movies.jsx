@@ -1,4 +1,5 @@
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import Pagination from "./common/pagination.jsx";
 import { paginate } from "../utils/paginate.js";
 import ListGroup from "./common/listGroup";
@@ -7,11 +8,16 @@ import Like from "./common/like";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
+    genres: [],
     pageSize: 4,
     currentPage: 1,
     currentGenre: "All Genres",
   };
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() });
+  }
 
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
@@ -41,6 +47,7 @@ class Movies extends Component {
   render() {
     const { length: count } = this.state.movies;
     const {
+      genres,
       pageSize,
       currentPage,
       movies: allMovies,
@@ -55,6 +62,7 @@ class Movies extends Component {
       <div className="row">
         <div className="col-2">
           <ListGroup
+            genres={genres}
             onGenreChange={this.handleGenreChange}
             currentGenre={currentGenre}
           />
