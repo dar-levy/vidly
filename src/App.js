@@ -14,10 +14,11 @@ class App extends Component {
         <NavBar />
         <div className="container">
           <Switch>
+            <Route path="/movies" exact component={Movies} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
-            <Route path="/" exact component={Movies} />
             <Route path="/not-found" component={NotFound} />
+            <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
           </Switch>
         </div>
