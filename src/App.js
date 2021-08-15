@@ -1,11 +1,12 @@
-import { Redirect, Route, Switch } from "react-router-dom";
-import NavBar from "./components/common/navbar";
 import React, { Component } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import NotFound from "./components/common/notFound";
+import NavBar from "./components/common/navbar";
+import MovieForm from "./components/movieForm";
+import Customers from "./components/customers";
+import Rentals from "./components/rentals";
 import Movies from "./components/movies";
 import "./App.css";
-import NotFound from "./components/common/notFound";
-import Rentals from "./components/rentals";
-import Customers from "./components/customers";
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         <NavBar />
         <div className="container">
           <Switch>
+            <Route path="/movies/:id" exact component={MovieForm} />
             <Route path="/movies" exact component={Movies} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
