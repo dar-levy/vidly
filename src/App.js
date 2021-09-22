@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import RegisterForm from "./components/registerForm";
 import NotFound from "./components/common/notFound";
 import NavBar from "./components/common/navbar";
 import MovieForm from "./components/movieForm";
@@ -7,7 +8,6 @@ import LoginForm from "./components/loginForm";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import Movies from "./components/movies";
-import RegisterForm from "./components/registerForm";
 import "./App.css";
 
 class App extends Component {
