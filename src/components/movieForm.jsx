@@ -14,13 +14,13 @@ class MovieForm extends Form {
   schema = {
     _id: Joi.string(),
     title: Joi.string().required().label("Title"),
-    genre: Joi.string().required().label("Genre"),
+    genreId: Joi.string().required().label("Genre"),
     numberInStock: Joi.number()
       .required()
       .min(0)
       .max(100)
       .label("Number in stock"),
-    rate: Joi.number().required().min(0).max(10).label("Rate"),
+    dailyRentalRate: Joi.number().required().min(0).max(10).label("Rate"),
   };
 
   componentDidMount() {
@@ -40,7 +40,7 @@ class MovieForm extends Form {
     return {
       _id: movie._id,
       title: movie.title,
-      genreId: movie.genre,
+      genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
@@ -48,6 +48,7 @@ class MovieForm extends Form {
 
   doSubmit = () => {
     saveMovie(this.state.data);
+
     this.props.history.push("/movies");
   };
 
